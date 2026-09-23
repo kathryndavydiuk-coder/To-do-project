@@ -1,0 +1,410 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #fffbff;
+  font-family: "Inter", sans-serif;
+  line-height: 1;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 16px;
+}
+h1 {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+}
+
+#today_weekday {
+  font-size: 20px;
+  font-weight: 500;
+}
+#today_date {
+  font-size: 15px;
+  font-weight: 400;
+}
+.search .filters {
+  width: 100%;
+  max-width: 720px;
+}
+.search {
+  height: 48px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6750a40d;
+  overflow: hidden;
+  gap: 16px;
+}
+.search > #search,
+.search__btn {
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+.search > #search {
+  flex: 1;
+  padding: 0 16px;
+}
+.search__btn img {
+  width: 48px;
+  height: 48px;
+}
+input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #49454f;
+}
+.filters {
+  height: 48px;
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid #79747e;
+  border-radius: 28px;
+  overflow: hidden;
+}
+.filters button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: transparent;
+  border: none;
+  border-right: 1px solid #79747e;
+
+  padding: 10px 12px;
+  cursor: pointer;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #1d1b20;
+
+  transition: background-color 0.15s ease;
+}
+.filters button:hover {
+  background-color: #6750a40d;
+}
+.filters button[aria-pressed="true"] {
+  background-color: #e8def8;
+}
+.filters button[aria-pressed="true"]::before {
+  content: "";
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background-color: #1d192b;
+
+  -webkit-mask-image: url("../assets/icons/button-tick.svg");
+  mask-image: url("../assets/icons/button-tick.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+.filters button:last-child {
+  border-right: none;
+}
+.editIcon {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  background-color: #e8def8;
+  border: none;
+
+  padding: 0;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border-right: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.editIcon:hover {
+  background-color: #d0bcff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.editIcon:focus-visible {
+  outline: 2px solid #6750a4;
+  outline-offset: 2px;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.todo__title {
+  font-weight: 500;
+  font-size: 20px;
+}
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.todo__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  min-height: 62px;
+  gap: 8px;
+  padding: 8px;
+
+  background-color: #6750a40d;
+  border-radius: 16px;
+}
+.todo__item[hidden] {
+  display: none;
+}
+.todo__check {
+  appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #49454f;
+  border-radius: 2px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.todo__check:checked {
+  background-image: url("../assets/icons/tick.svg");
+  color: #381e72;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #d0bcff;
+  border-color: #d0bcff;
+}
+.todo__check:focus-visible {
+  outline: 2px solid #6750a4;
+  outline-offset: 2px;
+}
+.todo__check:checked + .todo__body :is(.todo__date, .todo__text) {
+  color: #1d1b1e80;
+  text-decoration: line-through;
+}
+
+.todo__body {
+  display: grid;
+  gap: 8px;
+  cursor: pointer;
+  min-width: 0;
+}
+.todo__date {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #1d1b1e;
+}
+.todo__text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #1d1b1e;
+  transition: color 0.15s ease;
+}
+/*=============================================*/
+/* ─── ДІАЛОГ ─── */
+.sheet {
+  border: none;
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 28px;
+  background-color: #f7f2fa;
+  margin: auto auto 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+.sheet::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 4px;
+  border-radius: 100px;
+  background-color: #79747e;
+  margin: 0 auto 16px;
+}
+
+.sheet::backdrop {
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+/* ─── ФОРМА ─── */
+.sheet__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── ІНПУТИ ─── */
+.sheet__form input[type="text"],
+.sheet__form input[type="date"] {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #79747e;
+  border-radius: 4px;
+  background-color: transparent;
+
+  font-family: Roboto Flex;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #49454f;
+
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.sheet__form input:focus {
+  border-color: #6750a4;
+}
+
+/* ─── SWITCH ─── */
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1d1b1e;
+  cursor: pointer;
+}
+.switch input[name="remind"] {
+  appearance: none;
+  position: relative;
+
+  width: 52px;
+  height: 32px;
+  border-radius: 100px;
+
+  background-color: #e8def8; /* світлий, вимкнений */
+  border: 2px solid #79747e; /* рамка */
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  flex-shrink: 0;
+}
+
+/* Повзунок — круг всередині */
+.switch input[name="remind"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+
+  background-color: #79747e; /* сірий, вимкнений */
+
+  transition:
+    transform 0.2s ease,
+    width 0.2s ease,
+    height 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Коли увімкнено */
+.switch input[name="remind"]:checked {
+  background-color: #6750a4; /* фіолетовий */
+  border-color: #6750a4;
+}
+
+.switch input[name="remind"]:checked::after {
+  background-image: url("../assets/icons/small-tick.svg");
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%) translateX(20px);
+
+  background-color: #ffffff; /* білий повзунок */
+}
+
+/* Фокус */
+.switch input[name="remind"]:focus-visible {
+  outline: 2px solid #6750a4;
+  outline-offset: 2px;
+}
+
+/* ─── КНОПКИ ─── */
+.sheet__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 44px;
+}
+
+.sheet__actions button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 20px;
+
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.sheet__actions button[value="cancel"] {
+  background-color: transparent;
+  color: #6750a4;
+  border: 1px solid #79747e;
+}
+
+.sheet__actions button[value="cancel"]:hover {
+  background-color: #6750a40d;
+  border: 1px solid #79747e;
+}
+
+.sheet__actions button[value="confirm"] {
+  background-color: #6750a4;
+  color: #ffffff;
+}
+
+.sheet__actions button[value="confirm"]:hover {
+  background-color: #7965af;
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="styles/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1 id="today_weekday">Среда</h1>
+        <time id="today_date">3 января</time>
+      </header>
+
+      <form class="search" role="search">
+        <input type="search" id="search" name="search" placeholder="Поиск" />
+        <button type="submit" class="search__btn" aria-label="Искать">
+          <img src="assets/icons/search-icon.svg" alt="search" />
+        </button>
+      </form>
+
+      <nav class="filters" aria-label="Фильтр задач">
+        <button type="button" data-filter="all" aria-pressed="true">Все</button>
+        <button type="button" data-filter="active" aria-pressed="false">
+          Активные
+        </button>
+        <button type="button" data-filter="done" aria-pressed="false">
+          Завершенные
+        </button>
+      </nav>
+
+      <section class="todo">
+        <h2 class="todo__title">Список дел</h2>
+
+        <ul class="todo__list">
+          <li class="todo__item">
+            <input type="checkbox" class="todo__check" id="task_1" checked />
+            <label class="todo__body" for="task_1">
+              <time class="todo__date" datetime="2026-01-10T11:30"
+                >10 января, 11:30</time
+              >
+              <span class="todo__text">Покормить кошку</span>
+            </label>
+          </li>
+
+          <li class="todo__item">
+            <input type="checkbox" class="todo__check" id="task_2" />
+            <label class="todo__body" for="task_2">
+              <time class="todo__date" datetime="2026-01-10T11:30"
+                >10 января, 11:30</time
+              >
+              <span class="todo__text">Покормить кошку</span>
+            </label>
+          </li>
+
+          <li class="todo__item">
+            <input type="checkbox" class="todo__check" id="task_3" />
+            <label class="todo__body" for="task_3">
+              <time class="todo__date" datetime="2026-01-10T11:30"
+                >10 января, 11:30</time
+              >
+              <span class="todo__text">Покормить кошку</span>
+            </label>
+          </li>
+
+          <li class="todo__item">
+            <input type="checkbox" class="todo__check" id="task_4" />
+            <label class="todo__body" for="task_4">
+              <time class="todo__date" datetime="2026-01-10T11:30"
+                >10 января, 11:30</time
+              >
+              <span class="todo__text">Покормить кошку</span>
+            </label>
+          </li>
+        </ul>
+
+        <p class="todo__empty" hidden>Задач пока нет</p>
+      </section>
+
+      <button class="editIcon" type="button" aria-label="Добавить задачу">
+        <img src="assets/icons/edit-icon.svg" alt="" />
+      </button>
+    </main>
+
+    <template id="todo_item_template">
+      <li class="todo__item">
+        <input type="checkbox" class="todo__check" />
+        <label class="todo__body">
+          <time class="todo__date"></time>
+          <span class="todo__text"></span>
+        </label>
+      </li>
+    </template>
+
+    <dialog class="sheet" id="task_dialog">
+      <form method="dialog" class="sheet__form" id="task_form">
+        <input type="text" name="description" placeholder="Описание" />
+        <input type="date" name="date" placeholder="Дата" />
+        <label class="switch"
+          >Напомнить мне <input type="checkbox" name="remind"
+        /></label>
+        <div class="sheet__actions">
+          <button value="cancel">Отмена</button>
+          <button value="confirm">Добавить</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+  <script src="scripts/script.js"></script>
+</html>
